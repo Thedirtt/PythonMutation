@@ -1,3 +1,4 @@
+from codon_table import codon_table
 def main():
 	#Possible Codon Point Mutations
 	Silent = False;
@@ -190,6 +191,9 @@ def CheckEachNucleotide(Orig,Muta):
 	print (NewMuta)
 	print("--------------------")
 	return NewOrig,NewMuta
+
+def CheckMutationType(Orig,Muta):
+	pass
 
 if __name__ == "__main__":
 	main()
