@@ -1,4 +1,5 @@
 from codon_table import codon_table
+
 def main():
 	#Possible Codon Point Mutations
 	Silent = False;
@@ -62,7 +63,7 @@ def main():
 			print(f"Point mutation at pos {index}")
 			PointMutation = True
 
-
+	CheckMutationType(Sequence1,Sequence2)
 
 #Checks if both are valid dna strings
 #Valid DNA Codons contain A,T,C,G
@@ -193,7 +194,20 @@ def CheckEachNucleotide(Orig,Muta):
 	return NewOrig,NewMuta
 
 def CheckMutationType(Orig,Muta):
-	pass
+
+	OrigNewRNA = Orig.replace("T", "U")
+	MutaNewRNA = Muta.replace("T", "U")
+	
+	for i in range(0, len(OrigNewRNA), 3):
+
+		codon = OrigNewRNA[i:i+3]
+
+		if len(codon) < 3:
+			print(f"Incomplete codon  {i}")
+			continue
+
+		amino_acid = codon_table[codon]
+		print(codon, amino_acid)
 
 if __name__ == "__main__":
 	main()
