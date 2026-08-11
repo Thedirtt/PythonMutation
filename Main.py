@@ -18,7 +18,7 @@ def main():
 
 	userinput = input("Please Enter your Second DNA Sequence: ")
 	Sequence2 = userinput.upper()
-
+	print("--------------------")
 	#Sequence1 = "ATGCCATGCTAAGCT"
 	#Sequence2 = "ATGCCGTCTAAGCT" 
 
@@ -36,14 +36,13 @@ def main():
 	else:
 		print("Sequence 2 is NOT Valid DNA")
 		quit()
-	print("\n\n")
-
+	print("--------------------")
 	if(checkLength(Sequence1,Sequence2)):
 		print("DNA is the Same Length")
 	else:
 		print(f"DNA is Different Lengths\nSequence 1 DNA is {len(Sequence1)} Nucleotides long\nSequence 2 DNA is {len(Sequence2)} Nucleotides long")
 
-	print("")
+	print("--------------------")
 
 	#sets new strings to the new returned NeedleMan-Wunsch Algorithm results
 	NewOrig,NewMuta = CheckEachNucleotide(Sequence1,Sequence2)
@@ -62,7 +61,7 @@ def main():
 		elif NewOrig[index] != NewMuta[index]:
 			print(f"Point mutation at pos {index}")
 			PointMutation = True
-
+	print("--------------------")
 	CheckMutationType(Sequence1,Sequence2)
 
 #Checks if both are valid dna strings
@@ -169,7 +168,7 @@ def CheckEachNucleotide(Orig,Muta):
 			i -= 1
 			continue
 
-		# Otherwise, move left
+		# else move left
 		if j > 0 and matrix[i][j] == matrix[i][j-1] + GapPenalty:
 			NewOrig.append(Orig[j-1])
 			NewMuta.append("-")
@@ -190,24 +189,45 @@ def CheckEachNucleotide(Orig,Muta):
 	print("Results of the NeedleMan-Wunsch Algorithm:")
 	print (NewOrig)
 	print (NewMuta)
-	print("--------------------")
 	return NewOrig,NewMuta
 
 def CheckMutationType(Orig,Muta):
-
 	OrigNewRNA = Orig.replace("T", "U")
 	MutaNewRNA = Muta.replace("T", "U")
-	
+
 	for i in range(0, len(OrigNewRNA), 3):
 
-		codon = OrigNewRNA[i:i+3]
+		orig_codon = OrigNewRNA[i:i+3]
+		muta_codon = MutaNewRNA[i:i+3]
 
-		if len(codon) < 3:
-			print(f"Incomplete codon  {i}")
+		# Ignore incomplete codons
+		if len(orig_codon) < 3 or len(muta_codon) < 3:
+			print(f"Incomplete codon at {i}")
+			print("--")
 			continue
 
-		amino_acid = codon_table[codon]
-		print(codon, amino_acid)
+		orig_amino = codon_table[orig_codon]
+		muta_amino = codon_table[muta_codon]
+
+		
+		print(orig_codon, orig_amino, "->", muta_codon, muta_amino)
+
+		# Check whether there was a mutation
+		if orig_codon == muta_codon:
+			print("No mutation")
+			print("--")
+
+		elif orig_amino == muta_amino:
+			print("Silent mutation")
+			print("--")
+
+		elif muta_amino == "*":
+			print("Nonsense mutation")
+			print("--")
+
+		else:
+			print("Missense mutation")
+			print("--")
 
 if __name__ == "__main__":
 	main()
