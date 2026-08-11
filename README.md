@@ -40,8 +40,8 @@ This project was created to help me learn and explore an intersection of **compu
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Thedirt/DNA-Mutation-Analyzer.git
-cd DNA-Mutation-Analyzer
+gh repo clone Thedirtt/PythonMutation
+cd PythonMutation
 ```
 
 ### 2. Run the Program
@@ -49,13 +49,13 @@ cd DNA-Mutation-Analyzer
 Run the main Python file:
 
 ```bash
-python main.py
+python Main.py
 ```
 
 Depending on your system, you may need to use:
 
 ```bash
-python3 main.py
+python3 Main.py
 ```
 
 ### 3. Enter DNA Sequences
